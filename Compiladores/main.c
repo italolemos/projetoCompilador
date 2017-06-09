@@ -29,7 +29,7 @@ void regrak(int inicio, int tamanho, char arrayCharacters[]){
             index++;
             indexA++;
         }
-//        else if(contador == 0){
+//        else {
 //            printf("else\n");
 //            //Pega o Segundo Elemento do array
 //            arrayA[inicio] = arrayCharacters[inicio+1];
