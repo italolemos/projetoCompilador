@@ -7,6 +7,8 @@
 //
 
 #include <stdio.h>
+#include <string.h>
+#include <stdbool.h>
 
 #define TAMANHO 100;
 int i, j;
@@ -42,22 +44,64 @@ void regrak(int inicio, int tamanho, char arrayCharacters[]){
         arrayA[indexA] = arrayCharacters[j];
     }
    
-    for (i=0; i<10; i++){
-        printf("%c\n", arrayA[i]);
-    }
+//    for (i=0; i<10; i++){
+//        printf("%c\n", arrayA[i]);
+//    }
 
 }
 
+void remover_parentesis(char source[], char dest[]){
+    bool open_first = false;
+    bool last_close = false;
+    int aux = 0, open = 0;
+    
+    
+    int i;
+    for (i=0; i<20; i++){
+        if (source[i] == '('){
+            if (open == 0 && open_first == false && last_close == false){
+                open_first = true;
+            }
+            else {
+                dest[aux] = source[i];
+                aux++;
+                open++;
+            }
+        }
+        else if (source[i] == ')'){
+                if (open != 0){
+                    dest[aux] = source[i];
+                    aux++;
+                    open--;
+                }
+                else{
+                    open_first = false;
+                    last_close = true;
+                }
+            }
+        else {
+            dest[aux] = source[i];
+            aux++;
+        }
+    }
+    
+    for (i=0; i<20; i++){
+        printf("Posicao %d - %c\n",i, dest[i]);
+    }
+}
 
 int main(int argc, const char * argv[]) {
 //    int vetorTamanho = 10000;
 
     
-    char F_array[10] = "k(kk)kS";
-//    char D_array[vetorTamanho];
-   
+    char src[20] = "(KK)(S(kkk))";
+    char dest[20];
     
-    regrak(0, 10, F_array);
+    remover_parentesis(src, dest);
+//    int len = strlen(src);
+//    printf("%d", len);
+    
+    regrak(0, 10, src);
     
     return 0;
 }
