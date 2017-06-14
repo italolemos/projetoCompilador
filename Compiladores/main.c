@@ -11,43 +11,65 @@
 #include <stdbool.h>
 
 #define TAMANHO 100;
-int i, j;
-int inicio = 0;
-int parentese = 1;
-int auxiliar=0;
+
 
 // kab=a
-void regrak(int inicio, int tamanho, char arrayCharacters[]){
-    char arrayA[10];
-    int index = 1; //Ate aonde leu o arrayCharacters
-    int indexA = 0;// Ate aonde o array esta preenchido
+void regrak(char source[], char dest[]){
+    int i;
     
-    for (i=0; i<tamanho; i++) {
-        if(arrayCharacters[inicio+1] == '('){
-            if (arrayCharacters[i] == ')'){
-                break;
-            }
-            arrayA[i] = arrayCharacters[i+1];
-            index++;
+    //get_a
+    int open = 0;
+    int indexA = 1;
+    
+    if(source[indexA] == '('){
+        open++;
+        while (open != 0){
             indexA++;
+            if(source[indexA] == ')'){
+                open--;
+            }
+            else if(source[indexA] == '('){
+                open++;
+            }
         }
-//        else {
-//            printf("else\n");
-//            //Pega o Segundo Elemento do array
-//            arrayA[inicio] = arrayCharacters[inicio+1];
-//            
-//            inicio++;
-//        }
     }
     
-    for (j=index; j<tamanho; j++, indexA++) {
-        arrayA[indexA] = arrayCharacters[j];
+    printf("%d", indexA);
+    
+    //get_b
+    int openB = 0;
+    int indexB = indexA + 1;
+    if(source[indexB] == '('){
+        openB++;
+        while (openB != 0) {
+            indexB++;
+            if(source[indexB] == ')'){
+                openB--;
+            }
+            else if(source[indexB] == ')'){
+                openB++;
+            }
+        }
     }
-   
-//    for (i=0; i<10; i++){
-//        printf("%c\n", arrayA[i]);
-//    }
+    printf("\n%d\n", indexB);
+    
+    //Preenche com a
+    int pos = 0;
+    for (i=1; i<=indexA; i++) {
+        dest[pos] = source[i];
+        pos++;
+    }
+    
+    //Preenche comb
+    for (i=indexB+1; i<20; i++) {
+        dest[pos] = source[i];
+        pos++;
+    }
 
+    for (i=0; i<20; i++){
+        printf("Posicao %d - %c\n",i, dest[i]);
+    }
+    
 }
 
 void remover_parentesis(char source[], char dest[]){
@@ -89,19 +111,34 @@ void remover_parentesis(char source[], char dest[]){
         printf("Posicao %d - %c\n",i, dest[i]);
     }
 }
+//void reduzir(char source[], char dest[]){
+//    int aux = 0;
+//    
+//    while(aux==0){
+//        
+//        switch (source[0]) {
+//            case '(':
+//                remover_parentesis(char source, char dest);
+//                break;
+//            default:
+//                break;
+//        }
+//    }
+//}
+char test[5];
+
 
 int main(int argc, const char * argv[]) {
-//    int vetorTamanho = 10000;
 
-    
-    char src[20] = "(KK)(S(kkk))";
+
+    char src[20] = "KK(KKK)(S(KK))";
     char dest[20];
     
-    remover_parentesis(src, dest);
+    //remover_parentesis(src, dest);
 //    int len = strlen(src);
 //    printf("%d", len);
     
-    regrak(0, 10, src);
+    regrak(src, dest);
     
     return 0;
 }
