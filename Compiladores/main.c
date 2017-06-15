@@ -32,7 +32,6 @@ void regraS(char source[], char dest[]){
         }
     }
     
-    printf("%d", indexA);
     
     //get_b
     int openB = 0;
@@ -50,7 +49,6 @@ void regraS(char source[], char dest[]){
             }
         }
     }
-    printf("\n%d\n", indexB);
     
     //get_c
     int openC = 0;
@@ -68,8 +66,51 @@ void regraS(char source[], char dest[]){
             }
         }
     }
-    printf("%d\n", indexC);
+    
+    //Preenche com a
+    int pos = 0;
+    for (i=1; i<=indexA; i++) {
+        dest[pos] = source[i];
+        pos++;
+    }
+    
 
+    //Preenche com c
+    for (i=indexB+1; i<=indexC; i++) {
+        dest[pos] = source[i];
+        pos++;
+    }
+    
+    //Adicionar (
+    dest[pos] = '(';
+    pos++;
+    
+    //Preencer com b
+    for (i=indexA+1; i<=indexB; i++) {
+        dest[pos] = source[i];
+        pos++;
+    }
+    
+    //Preenche com c
+    for (i=indexB+1; i<=indexC; i++) {
+        dest[pos] = source[i];
+        pos++;
+    }
+    
+    //Adicionar )
+    dest[pos] = ')';
+    pos++;
+    
+    //Preencher resto
+    for (i=indexC+1; i<30; i++) {
+        dest[pos] = source[i];
+        pos++;
+    }
+    
+    for (i=0; i<30; i++){
+        printf("Posicao %d - %c\n",i, dest[i]);
+    }
+    
 }
 
 // kab=a
@@ -119,13 +160,14 @@ void regrak(char source[], char dest[]){
         pos++;
     }
     
-    //Preenche com b
+    //Preenche com b e com o resto
     for (i=indexB+1; i<20; i++) {
         dest[pos] = source[i];
         pos++;
     }
+    
 
-    for (i=0; i<20; i++){
+    for (i=0; i<30; i++){
         printf("Posicao %d - %c\n",i, dest[i]);
     }
     
@@ -166,7 +208,7 @@ void remover_parentesis(char source[], char dest[]){
         }
     }
     
-    for (i=0; i<20; i++){
+    for (i=0; i<30; i++){
         printf("Posicao %d - %c\n",i, dest[i]);
     }
 }
@@ -190,12 +232,13 @@ char test[5];
 int main(int argc, const char * argv[]) {
 
     
-    char src[20] = "S(KKK)(SK)(SSS)K";
-    char dest[20];
+    char src[30] = "S(KKK)(SK)KKKKSSK";
+    char dest[30];
     
     //remover_parentesis(src, dest);
-//    int len = strlen(src);
-//    printf("%d", len);
+    //    int len = strlen(src);
+    //    printf("%d", len);
+    
     
     regraS(src, dest);
     
