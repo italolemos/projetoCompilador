@@ -12,6 +12,65 @@
 
 #define TAMANHO 100;
 
+void regraS(char source[], char dest[]){
+    int i;
+    
+    //get_a
+    int openA = 0;
+    int indexA = 1;
+    
+    if(source[indexA] == '('){
+        openA++;
+        while (openA != 0){
+            indexA++;
+            if(source[indexA] == ')'){
+                openA--;
+            }
+            else if(source[indexA] == '('){
+                openA++;
+            }
+        }
+    }
+    
+    printf("%d", indexA);
+    
+    //get_b
+    int openB = 0;
+    int indexB = indexA + 1;
+    
+    if(source[indexB] == '('){
+        openB++;
+        while (openB != 0) {
+            indexB++;
+            if(source[indexB] == ')'){
+                openB--;
+            }
+            else if(source[indexB] == ')'){
+                openB++;
+            }
+        }
+    }
+    printf("\n%d\n", indexB);
+    
+    //get_c
+    int openC = 0;
+    int indexC = indexB + 1;
+    
+    if(source[indexC] == '('){
+        openC++;
+        while (openC != 0) {
+            indexC++;
+            if(source[indexC] == ')'){
+                openC--;
+            }
+            else if(source[indexC] == ')'){
+                openC++;
+            }
+        }
+    }
+    printf("%d\n", indexC);
+
+}
 
 // kab=a
 void regrak(char source[], char dest[]){
@@ -51,7 +110,7 @@ void regrak(char source[], char dest[]){
             }
         }
     }
-    printf("\n%d\n", indexB);
+    printf("\n%d", indexB);
     
     //Preenche com a
     int pos = 0;
@@ -60,7 +119,7 @@ void regrak(char source[], char dest[]){
         pos++;
     }
     
-    //Preenche comb
+    //Preenche com b
     for (i=indexB+1; i<20; i++) {
         dest[pos] = source[i];
         pos++;
@@ -130,15 +189,15 @@ char test[5];
 
 int main(int argc, const char * argv[]) {
 
-
-    char src[20] = "KK(KKK)(S(KK))";
+    
+    char src[20] = "S(KKK)(SK)(SSS)K";
     char dest[20];
     
     //remover_parentesis(src, dest);
 //    int len = strlen(src);
 //    printf("%d", len);
     
-    regrak(src, dest);
+    regraS(src, dest);
     
     return 0;
 }
