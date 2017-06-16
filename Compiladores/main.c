@@ -9,8 +9,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
-
-#define TAMANHO 100;
+#define TAMANHO 50
 
 void regraS(char source[], char dest[]){
     int i;
@@ -102,14 +101,14 @@ void regraS(char source[], char dest[]){
     pos++;
     
     //Preencher resto
-    for (i=indexC+1; i<30; i++) {
+    for (i=indexC+1; i<TAMANHO; i++) {
         dest[pos] = source[i];
         pos++;
     }
     
-    for (i=0; i<30; i++){
-        printf("Posicao %d - %c\n",i, dest[i]);
-    }
+//    for (i=0; i<100; i++){
+//        printf("Posicao %d - %c\n",i, dest[i]);
+//    }
     
 }
 
@@ -134,7 +133,6 @@ void regrak(char source[], char dest[]){
         }
     }
     
-    printf("%d", indexA);
     
     //get_b
     int openB = 0;
@@ -151,7 +149,6 @@ void regrak(char source[], char dest[]){
             }
         }
     }
-    printf("\n%d", indexB);
     
     //Preenche com a
     int pos = 0;
@@ -161,15 +158,15 @@ void regrak(char source[], char dest[]){
     }
     
     //Preenche com b e com o resto
-    for (i=indexB+1; i<20; i++) {
+    for (i=indexB+1; i<TAMANHO; i++) {
         dest[pos] = source[i];
         pos++;
     }
     
 
-    for (i=0; i<30; i++){
-        printf("Posicao %d - %c\n",i, dest[i]);
-    }
+//    for (i=0; i<30; i++){
+//        printf("Posicao %d - %c\n",i, dest[i]);
+//    }
     
 }
 
@@ -180,7 +177,7 @@ void remover_parentesis(char source[], char dest[]){
     
     
     int i;
-    for (i=0; i<20; i++){
+    for (i=0; i<TAMANHO; i++){
         if (source[i] == '('){
             if (open == 0 && open_first == false && last_close == false){
                 open_first = true;
@@ -208,9 +205,9 @@ void remover_parentesis(char source[], char dest[]){
         }
     }
     
-    for (i=0; i<30; i++){
-        printf("Posicao %d - %c\n",i, dest[i]);
-    }
+//    for (i=0; i<30; i++){
+//        printf("Posicao %d - %c\n",i, dest[i]);
+//    }
 }
 //void reduzir(char source[], char dest[]){
 //    int aux = 0;
@@ -226,21 +223,38 @@ void remover_parentesis(char source[], char dest[]){
 //        }
 //    }
 //}
-char test[5];
 
+
+
+char source[TAMANHO] = "S(KK)S(KKK)K(SK)KKKKSSK";
+char dest[TAMANHO];
 
 int main(int argc, const char * argv[]) {
 
+    int j;
     
-    char src[30] = "S(KKK)(SK)KKKKSSK";
-    char dest[30];
-    
-    //remover_parentesis(src, dest);
-    //    int len = strlen(src);
-    //    printf("%d", len);
-    
-    
-    regraS(src, dest);
-    
+    for (j=0; j<14; j++) {
+        printf("Fonte: ");
+        printf(source);
+        printf("\n");
+        switch (source[0]) {
+            case '(':
+                remover_parentesis(source, dest);
+                break;
+            case 'K':
+                regrak(source, dest);
+                break;
+            case 'S':
+                regraS(source, dest);
+                break;
+            default:
+                break;
+        }
+        strcpy(source, dest);
+        printf("Destino: ");
+        printf(dest);
+        printf("\n");
+    }
+
     return 0;
 }
