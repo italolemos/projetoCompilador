@@ -232,7 +232,7 @@ char dest[TAMANHO];
 int main(int argc, const char * argv[]) {
 
     int j;
-    
+    printf("italo");
     for (j=0; j<14; j++) {
         printf("Fonte: ");
         printf(source);
